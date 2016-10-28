@@ -1,0 +1,174 @@
+<html>
+<head>
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+<link rel="stylesheet" href="C:\code\workspace\leaflet-test\css\test-leaflet.css" />
+<link rel="stylesheet" href="C:\code\workspace\leaflet-test\css\MarkerCluster.css" />
+<link rel="stylesheet" href="C:\code\workspace\leaflet-test\css\MarkerCluster.Default.css" />
+</head>
+<body>
+<div id="mapid"></div>
+</body>
+<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+<script src="js/leaflet.markercluster-src.js"></script>
+<script>
+
+    //var wagons = [ [50.773775, 4.617623], [50.618936, 5.037850], [50.733809, 3.801888], [50.941950, 3.348702], [51.079332, 4.592904] ];
+
+    var wagons = [ [50.845635, 4.357092], [50.845635, 4.357092], [50.845635, 4.357092], [50.845635, 4.357092], [50.845635, 4.357092] ];
+
+    var itineraries = [ [ [50.845635, 4.357092], [50.835797, 4.335732], [50.893041, 4.067648], [50.948967, 4.027103], [51.014405, 3.775365], [51.051021, 3.708190], [51.096047, 3.428722], [51.219193, 3.224506] ], [ [50.845635, 4.357092], [50.863726, 4.361959], [50.886818, 4.464288], [50.896811, 4.589962], [50.874774, 4.719161], [50.796477, 4.942256], [50.709923, 5.198031], [50.624719, 5.566619] ], [ [50.845635, 4.357092], [50.835797, 4.335732], [50.774849, 4.276383], [50.729356, 4.231092], [50.697367, 4.047623], [50.626588, 3.782368], [50.605298, 3.626610], [50.612900, 3.399492] ], [ [50.845635, 4.357092], [50.863726, 4.361959], [50.943827, 4.445703], [50.986208, 4.473984], [51.041311, 4.492129], [51.133022, 4.477598], [51.177464, 4.451833], [51.218123, 4.421339] ], [ [50.845635, 4.357092], [50.673744, 4.569430], [50.568207, 4.694165], [50.471517, 4.853438], [50.297513, 5.087078], [50.161399, 5.267174], [49.921844, 5.376488], [49.691431, 5.750101] ]  ]
+
+    //var directions = ['W', 'N', 'N', 'E', 'S'];
+
+	var mymap = L.map('mapid').setView([50.8503, 4.3517], 10); 
+
+	// Mapbox tile (change to something nicer)
+	L.tileLayer('https://api.mapbox.com/styles/v1/vassvdm/ciowq7yly0012dum1tbpfubd1/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoidmFzc3ZkbSIsImEiOiJjaW93b3F3a3cwMDgydnltMnpyNTF2bmxhIn0.qv9RYZlH6waRMqEsi1Ptfw').addTo(mymap);
+
+	//var markersLayer = new L.LayerGroup();	//layer contain searched elements
+
+	var circleGroup = L.markerClusterGroup({
+		iconCreateFunction: function (cluster) {
+			var markers = cluster.getAllChildMarkers();
+			var n = 0;
+			for (var i = 0; i < markers.length; i++) {
+				if (typeof markers[i].number != 'undefined') {
+					n += markers[i].number;
+				} else {
+					n += 1;
+				}
+			}
+			return L.divIcon({ html: n, className: 'mycluster', iconSize: L.point(40, 40) });
+		},
+	    spiderfyOnMaxZoom: true,
+	    showCoverageOnHover: true,
+	    zoomToBoundsOnClick: true
+	});
+
+	//var marker = L.marker([50.8356, 4.3357]).addTo(mymap); // 50.8356° N, 4.3357° E
+	//marker.bindPopup("<b>Gare du Midi</b><br>Je suis une gare."); //.openPopup();
+
+	/* START CHNAGES */
+
+	var WagonIcon = L.Icon.extend({
+	    options: {
+	        iconSize:     [26, 32]
+	    }
+	});
+
+	var greenIcon = new WagonIcon({iconUrl: 'img/green_marker.png'}),
+        redIcon = new WagonIcon({iconUrl: 'img/red_marker.png'}),
+        orangeIcon = new WagonIcon({iconUrl: 'img/orange_marker.png'});
+
+    var m1 = L.marker([50.9703, 4.3717], {icon: greenIcon}).addTo(mymap).bindPopup("I am a green wagon.");
+	var m2 = L.marker([50.8503, 4.4417], {icon: redIcon}).addTo(mymap).bindPopup("I am a red wagon.");
+	var m3 = L.marker([50.7303, 4.4017], {icon: orangeIcon}).addTo(mymap).bindPopup("I am an orange wagon.");
+	circleGroup.addLayer(m1);
+	circleGroup.addLayer(m2);
+	circleGroup.addLayer(m3);
+
+	var circles = [];
+
+	function createCircle(coordinates) {
+		return L.marker(coordinates, {icon: greenIcon})
+		/**return new L.CircleMarker(coordinates, 600, {
+		    color: 'green',
+		    fillColor: '#f03',
+		    fillOpacity: 0.5
+		})*/ //.addTo(mymap);
+	}
+
+	/* END CHANGES */
+
+	function createFullCircleWithCoordinates(coordinates) {
+		var newCircle = createCircle(coordinates);
+		newCircle.bindPopup("<p><b>Wagon</b></p><p>Wagon Id: <b>27 55 45 2232 258-7</b></p><p>Type de wagon: <b>Wagon-citerne</b></p><p>Type de chargement: <b>Hydrog&egrave;ne liquide</b></p><p>Vitesse autoris&eacute;e: <b>50 km/h</b></p>");
+		circleGroup.addLayer(newCircle);
+		return newCircle;
+	}
+
+	function createFullCircle(number) {
+		circles[number] = createCircle(wagons[number]);
+		circles[number].bindPopup("<p><b>Wagon</b></p><p>Wagon Id: <b>27 55 " + number + "5 2232 258-7</b></p><p>Type de wagon: <b>Wagon-citerne</b></p><p>Type de chargement: <b>Hydrog&egrave;ne liquide</b></p><p>Vitesse autoris&eacute;e: <b>50 km/h</b></p>");
+		circleGroup.addLayer(circles[number]);
+		return circles[number];
+	}
+
+	for(i = 0; i < wagons.length; i++) {
+		createFullCircle(i)
+	}
+
+	mymap.addLayer(circleGroup);
+
+	var openrailwaymap = new L.TileLayer('http://{s}.tiles.openrailwaymap.org/standard/{z}/{x}/{y}.png',
+	{
+		attribution: '<a href="http://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>, Style: <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA 2.0</a> <a href="http://www.openrailwaymap.org/">OpenRailwayMap</a> and OpenStreetMap',
+		minZoom: 2,
+		maxZoom: 19,
+		tileSize: 256
+	}).addTo(mymap);
+
+	//alert("circles: " + circles)
+	//alert("circle latlng: " + circles[0].getLatLng().lat)
+
+	/**function updateCoordinates() {
+		for(i = 0; i < wagons.length; i++) {
+			move(circles[i], directions[i]);
+		}
+	}
+
+	function move(circle, direction) {
+		if(direction === 'N') {
+			circle.setLatLng(new L.LatLng(circle.getLatLng().lat + 0.01, circle.getLatLng().lng))
+		} else if(direction === 'W') {
+			circle.setLatLng(new L.LatLng(circle.getLatLng().lat, circle.getLatLng().lng - 0.01))
+		} else if(direction === 'E') {
+			circle.setLatLng(new L.LatLng(circle.getLatLng().lat, circle.getLatLng().lng + 0.01))
+		} else if(direction === 'S') {
+			circle.setLatLng(new L.LatLng(circle.getLatLng().lat - 0.01, circle.getLatLng().lng))
+		} else {}
+	}*/
+
+	var j = 1;
+
+	function updateCoordinatesItinerary() {
+		if(j < 8) {
+			circleGroup.clearLayers();
+			for(i = 0; i < wagons.length; i++) {
+				//mymap.removeLayer(circles[i]);
+				moveAlongItinerary(circles[i], i,  itineraries[i], j);
+			}
+			mymap.addLayer(circles)
+			j+=1;
+		}
+	}
+
+	function moveAlongItinerary(circle, index, itinerary, step) {
+		
+		// we have to remove the circle and add it again to the map to trigger the clustering
+		// TODO: this doesn't work very well...
+		
+		//var elementPos = circles.map(function(x) {return x.id; }).indexOf(circle);
+		console.log("index: " + index)
+		//mymap.removeLayer(circle);
+		var nextPos = itinerary[step];
+		console.log("nextPos: " + nextPos)
+		var newCircle = createFullCircleWithCoordinates(nextPos);
+		circles[index] = newCircle
+		//mymap.addLayer(circles[index])
+		console.log("circles[" +  index + "] : " + circles[index])
+		//newCircle.setLatLng(nextPos);
+	}
+
+    var millisecondsToWait = 500;
+    //var timeCounter = 0;
+    //while(timeCounter < 500) {
+      window.setInterval(function(){
+	    //updateCoordinates()
+	    updateCoordinatesItinerary()
+	  }, 5000);
+    //}
+	
+
+</script>
+</html>

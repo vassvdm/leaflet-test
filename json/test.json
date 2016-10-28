@@ -1,0 +1,56 @@
+[{
+	"id": 0,
+	"wagon_id": "57 22 1234 5678-9",
+	"contents": "Propene",
+	"status": 0,
+	"maintenance": 55
+},
+{
+	"id": 1,
+	"wagon_id": "57 22 2345 6789-0",
+	"contents": "Hydrogen",
+	"status": 0,
+	"maintenance": 55
+},
+{
+	"id": 2,
+	"wagon_id": "57 22 3456 7890-1",
+	"contents": "Propene",
+	"status": 0,
+	"maintenance": 55
+},
+{
+	"id": 3,
+	"wagon_id": "57 22 4567 8901-2",
+	"contents": "Propene",
+	"status": 0,
+	"maintenance": 55
+},
+{
+	"id": 4,
+	"wagon_id": "57 22 1345 6789-0",
+	"contents": "Propene",
+	"status": 0,
+	"maintenance": 55
+},
+{
+	"id": 5,
+	"wagon_id": "57 22 1123 4567-8",
+	"contents": "Propene",
+	"status": 0,
+	"maintenance": 55
+},
+{
+	"id": 6,
+	"wagon_id": "44 21 1234 5678-9",
+	"contents": "Propene",
+	"status": 1,
+	"maintenance": 55
+},
+{
+	"id": 7,
+	"wagon_id": "44 22 2345 6789-1",
+	"contents": "Propene",
+	"status": 2,
+	"maintenance": 55
+}]

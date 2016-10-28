@@ -1,0 +1,88 @@
+<html>
+<head>
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+<link rel="stylesheet" href="C:\code\workspace\leaflet-test\css\test-leaflet.css" />
+<link rel="stylesheet" href="C:\code\workspace\leaflet-test\css\MarkerCluster.css" />
+<link rel="stylesheet" href="C:\code\workspace\leaflet-test\css\MarkerCluster.Default.css" />
+</head>
+<body>
+<div id="mapid"></div>
+</body>
+<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+<script src="js/leaflet.markercluster-src.js"></script>
+
+
+<script>
+
+var mymap = L.map('mapid').setView([50.8503, 4.3517], 10); 
+
+// Mapbox tile (change to something nicer)
+L.tileLayer('https://api.mapbox.com/styles/v1/vassvdm/ciowq7yly0012dum1tbpfubd1/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoidmFzc3ZkbSIsImEiOiJjaW93b3F3a3cwMDgydnltMnpyNTF2bmxhIn0.qv9RYZlH6waRMqEsi1Ptfw').addTo(mymap);
+
+
+var circles = L.markerClusterGroup({
+    spiderfyOnMaxZoom: true,
+    showCoverageOnHover: true,
+    zoomToBoundsOnClick: true
+});
+
+var circle1 = new L.CircleMarker([50.8356, 4.3357], 1, {
+            color: 'blue',
+            fillColor: '#ffffff',
+            fillOpacity: 0.5
+        });
+
+circles.addLayer(circle1);
+
+var circle2 = new L.CircleMarker([51.219193, 3.224506], 1, {
+            color: 'blue',
+            fillColor: '#ffffff',
+            fillOpacity: 0.5
+        });
+
+circles.addLayer(circle2);
+
+var circle3 = new L.CircleMarker([50.863726, 4.361959], 1, {
+            color: 'blue',
+            fillColor: '#ffffff',
+            fillOpacity: 0.5
+        });
+
+circles.addLayer(circle3);
+
+var circle4 = new L.CircleMarker([51.219194, 3.224509], 1, {
+            color: 'blue',
+            fillColor: '#ffffff',
+            fillOpacity: 0.5
+        });
+
+circles.addLayer(circle4);
+
+
+
+/**
+var markers = L.markerClusterGroup({
+    iconCreateFunction: function(cluster) {
+		return L.divIcon({ className: 'circle-div-icon' });
+	}
+});
+*/
+
+//markers.addLayer(L.marker(getRandomLatLng(mymap)));
+//markers.addLayer(L.marker([50.8356, 4.3357]));
+//markers.addLayer(L.marker([50.8356, 4.3357]));
+//markers.addLayer(L.marker([51.219193, 3.224506]));
+//var marker4 = L.marker([50.863726, 4.361959]).addTo(mymap); 
+//var marker5 = L.marker([50.886818, 4.464288]).addTo(mymap); 
+//var marker6 = L.marker([50.893041, 4.067648]).addTo(mymap); 
+mymap.addLayer(circles);
+
+/**
+var markers = L.markerClusterGroup({
+    iconCreateFunction: function(cluster) {
+        return L.divIcon({ html: '<b>' + cluster.getChildCount() + '</b>' });
+    }
+});*/
+
+</script>
+</html>

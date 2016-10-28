@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="26px" height="32px" viewBox="0 0 26 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <title>876C9FC3-5D12-46FF-8829-C042F06E7963</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <path d="M10,25 C8.66342857,23.9530855 0,16.8948184 0,9.97332847 C0,4.4743201 4.48628571,0 10,0 C15.5137143,0 20,4.4743201 20,9.97332847 C20,16.8948184 11.3365714,23.9530855 10,25 L10,25 Z" id="path-1"></path>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="-3" y="-3" width="26" height="31">
+            <rect x="-3" y="-3" width="26" height="31" fill="white"></rect>
+            <use xlink:href="#path-1" fill="black"></use>
+        </mask>
+        <mask id="mask-3" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="-1" y="-1" width="22" height="27">
+            <rect x="-1" y="-1" width="22" height="27" fill="white"></rect>
+            <use xlink:href="#path-1" fill="black"></use>
+        </mask>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Marker" transform="translate(3.000000, 3.000000)">
+            <g id="marker-copy">
+                <g id="Layer_1">
+                    <g id="Group">
+                        <g id="Shape">
+                            <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                            <use stroke-opacity="0.1" stroke="#000000" mask="url(#mask-2)" stroke-width="6" xlink:href="#path-1"></use>
+                            <use stroke-opacity="0.2" stroke="#000000" mask="url(#mask-3)" stroke-width="2" xlink:href="#path-1"></use>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
